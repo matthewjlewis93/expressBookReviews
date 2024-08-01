@@ -8,7 +8,7 @@ const public_users = express.Router();
 public_users.post("/register", (req,res) => {
   const { username, password } = req.body;
   if (username && password) {
-    if (users.filter((user) => user.username === username).length == 0) { //new user
+    if (!isValid(username)) { //new user
       users.push({"username": username, "password": password})
       res.send(`User ${username} has been registered.`)
     } else {
